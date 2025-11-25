@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -25,7 +24,7 @@ export default function AccountCard({ account }: Props) {
   const bg = typeColors[account.type] ?? typeColors.other;
 
   return (
-    <Card>
+    <Card sx={{ borderRadius: 4 }}>
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: bg }}>{initials}</Avatar>}
         title={account.name}
