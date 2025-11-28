@@ -5,9 +5,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AccountCard from "../../components/account/account-card";
 import { useAccounts } from "../../hooks/useAccounts";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button, Card, CardContent, Icon, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import React from "react";
+import { RemoveCircle } from "@mui/icons-material";
 
 export default function Home() {
   // const listAccount = [new AccountViewModel()];
@@ -21,37 +22,76 @@ export default function Home() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const balance: number = 18500;
+  const buttons = [
+    { label: "Ingreso", icon: <AddIcon /> },
+    { label: "Gasto", icon: <RemoveCircle /> },
+    { label: "Cuenta", icon: <AddIcon /> },
+  ];
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h3" gutterBottom>
         Mis cuentas
       </Typography>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <AddIcon></AddIcon>
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        slotProps={{
-          paper: {
-            'aria-labelledby': 'basic-button',
-          },
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
 
-      
+      {/* Contenedor centrado para la tarjeta de balance */}
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
+        <Card
+          sx={{
+            width: { xs: "100%", sm: "100%", md: 700 },
+            borderRadius: 3,
+            background: "linear-gradient(135deg, #3550EE, #4F6FF5)",
+            color: "white",
+            boxShadow: { xs: 2, sm: 4 },
+          }}
+        >
+          <CardContent>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 2,
+                gap: 1,
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ opacity: 0.9, textAlign: "center" }}>
+                Balance general
+              </Typography>
+            </Box>
+
+            <Typography variant="h4" fontWeight="bold">
+              {balance.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
+
+      {/* Grid de 2 columnas para los botones */}
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {buttons.map((btn) => (
+          <Grid item xs={6} sm={6} md={3} key={btn.label}>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{
+                height: 90,
+                borderRadius: 3,
+                flexDirection: "column",
+                textTransform: "none",
+                gap: 1,
+              }}
+            >
+              <Box>{btn.icon}</Box>
+              <Typography>{btn.label}</Typography>
+            </Button>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Cuentas del usuario */}
       {loading && (
         <Box sx={{ display: "flex", justifyContent: "center", py: 4 }}>
           <CircularProgress />
@@ -65,13 +105,18 @@ export default function Home() {
       )}
 
       {!loading && accounts.length > 0 && (
-        <Grid container spacing={2}>
-          {accounts.map((acc) => (
-            <Grid item xs={12} sm={6} md={4} key={acc.id}>
-              <AccountCard account={acc} />
-            </Grid>
-          ))}
-        </Grid>
+        <>
+          <Typography variant="h4" gutterBottom sx={{ mt: 3 }}>
+            Tus cuentas
+          </Typography>
+          <Grid container spacing={2}>
+            {accounts.map((acc) => (
+              <Grid item xs={12} sm={6} md={4} key={acc.id}>
+                <AccountCard account={acc} />
+              </Grid>
+            ))}
+          </Grid>
+        </>
       )}
 
       {!loading && accounts.length === 0 && !error && (

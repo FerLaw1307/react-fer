@@ -106,9 +106,11 @@ export default function Layout() {
         </Drawer>
       </Box>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {/* <Toolbar /> */}
-        <Outlet />
+      <Box component="main" sx={{ flexGrow: 1, p: 3, display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <Toolbar /> {/* Espaciador para el AppBar fijo */}
+        <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );
