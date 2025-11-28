@@ -24,7 +24,7 @@ export default function AccountCard({ account }: Props) {
   const bg = typeColors[account.type] ?? typeColors.other;
 
   return (
-    <Card sx={{ borderRadius: 4 }}>
+    <Card sx={{ borderRadius: 4, borderColor: bg, borderWidth: 2, borderStyle: 'solid' }}>
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: bg }}>{initials}</Avatar>}
         title={account.name}

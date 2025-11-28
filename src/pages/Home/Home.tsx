@@ -40,9 +40,9 @@ export default function Home() {
           sx={{
             width: { xs: "100%", sm: "100%", md: 700 },
             borderRadius: 3,
-            background: "linear-gradient(135deg, #3550EE, #4F6FF5)",
-            color: "white",
-            boxShadow: { xs: 2, sm: 4 },
+            borderColor: 'black',
+            borderWidth: 1,
+            borderStyle: 'solid',
           }}
         >
           <CardContent>
@@ -75,7 +75,7 @@ export default function Home() {
           <Grid item xs={6} sm={6} md={3} key={btn.label}>
             <Button
               fullWidth
-              variant="contained"
+              variant="outlined"
               sx={{
                 height: 90,
                 borderRadius: 3,
@@ -107,7 +107,7 @@ export default function Home() {
       {!loading && accounts.length > 0 && (
         <>
           <Typography variant="h4" gutterBottom sx={{ mt: 3 }}>
-            Tus cuentas
+            Mis cuentas
           </Typography>
           <Grid container spacing={2}>
             {accounts.map((acc) => (
