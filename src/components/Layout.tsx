@@ -16,12 +16,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import WidgetsIcon from '@mui/icons-material/Widgets';
 
 const drawerWidth = 240;
 const appTitle = "Michi accounts";
 const navItems = [
   { text: "Mis cuentas", to: "/", icon: <HomeIcon /> },
   { text: "Contacto", to: "/contact", icon: <ContactMailIcon /> },
+  { text: "Experimentos - Tabs", to: "/experiments/tabs/1", icon: <WidgetsIcon /> },
 ];
 
 export default function Layout() {
