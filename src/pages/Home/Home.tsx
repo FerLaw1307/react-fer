@@ -5,23 +5,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AccountCard from "../../components/account/account-card";
 import { useAccounts } from "../../hooks/useAccounts";
-import { Button, Card, CardContent, Icon, Menu, MenuItem } from "@mui/material";
+import { Button, Card, CardContent} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import React from "react";
 import { RemoveCircle } from "@mui/icons-material";
 
 export default function Home() {
   // const listAccount = [new AccountViewModel()];
   // const { accounts, loading, error } = {accounts: listAccount,  loading: true , error :""};
   const { accounts, loading, error } = useAccounts();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
   const balance: number = 18500;
   const buttons = [
     { label: "Ingreso", icon: <AddIcon /> },
