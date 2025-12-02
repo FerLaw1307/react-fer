@@ -6,6 +6,7 @@ import Alert from "@mui/material/Alert";
 import AccountCard from "../../components/account/account-card";
 import { useAccounts } from "../../hooks/useAccounts";
 import { Button, Card, CardContent} from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 import AddIcon from "@mui/icons-material/Add";
 import { RemoveCircle } from "@mui/icons-material";
 
@@ -16,10 +17,14 @@ export default function Home() {
 
   const balance: number = 18500;
   const buttons = [
-    { label: "Ingreso", icon: <AddIcon /> },
-    { label: "Gasto", icon: <RemoveCircle /> },
-    { label: "Cuenta", icon: <AddIcon /> },
+    { label: "Ingreso", icon: <AddIcon />, url: "/transactions/new?type=income" },
+    { label: "Gasto", icon: <RemoveCircle />, url: "/transactions/new?type=expense" },
+    { label: "Cuenta", icon: <AddIcon />, url: "/account-create" }, 
   ];
+  const navigate = useNavigate();
+
+
+
   return (
     <Box>
       <Typography variant="h3" gutterBottom>
@@ -68,6 +73,7 @@ export default function Home() {
             <Button
               fullWidth
               variant="outlined"
+              onClick={() => navigate(btn.url)}
               sx={{
                 height: 90,
                 borderRadius: 3,

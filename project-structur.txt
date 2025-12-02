@@ -1,0 +1,65 @@
+src/
+│
+├── api/                     # Configuración y servicios HTTP
+│   ├── httpClient.ts        # Axios o fetch wrappers
+│   ├── endpoints.ts         # Construcción centralizada de endpoints
+│   └── interceptors.ts      # Manejo de tokens, logs, errores
+│
+├── auth/                    # Seguridad / autenticación
+│   ├── AuthContext.tsx
+│   ├── AuthProvider.tsx
+│   ├── useAuth.ts           # Hook para acceder al contexto
+│   ├── authService.ts       # Login / logout / refresh token
+│   └── guards/              # Rutas protegidas
+│       └── PrivateRoute.tsx
+│
+├── common/                  # Componente comunes (reutilizables)
+│   ├── alerts/              # Alertas
+│   ├── modals/              # Modales
+│   ├── buttons/             # Botones
+│   ├── inputs/              # Inputs genéricos
+│   ├── tabs/                # Tabs comunes
+│   └── index.ts             # Exportador
+│
+├── components/              # Componentes por entidad
+│   └── account/             # Ejemplo: entidad Account
+│       ├── AccountList.tsx
+│       ├── AccountCard.tsx
+│       ├── AccountForm.tsx  # Formulario de create/edit
+│       └── hooks/
+│           ├── useAccountList.ts
+│           └── useAccountForm.ts
+│
+├── core/                    # Núcleo compartido del sistema
+│   ├── dto/                 # DTOs para transporte de datos
+│   │   └── AccountDto.ts
+│   ├── viewmodels/          # View Models para la UI
+│   │   └── AccountViewModel.ts
+│   ├── enums/               # Enumeraciones globales
+│   ├── utils/               # Funciones generales
+│   │   └── dateUtils.ts
+│   └── storage/             # LocalStorage wrapper
+│       └── localStorageService.ts
+│
+├── hooks/                   # Hooks reutilizables independientes
+│   ├── useLocalStorage.ts
+│   ├── useDebounce.ts
+│   └── useFetch.ts
+│
+├── pages/                   # Vistas/Rutas principales
+│   ├── Home/
+│   │   └── HomePage.tsx
+│   ├── Login/
+│   │   └── LoginPage.tsx
+│   └── Account/
+│       └── AccountPage.tsx
+│
+├── router/                  # Ruteo centralizado
+│   └── AppRouter.tsx
+│
+├── styles/                  # Estilos globales
+│   ├── globals.css
+│   └── variables.css
+│
+├── App.tsx                  # componente raíz
+└── main.tsx                 # punto de entrada
