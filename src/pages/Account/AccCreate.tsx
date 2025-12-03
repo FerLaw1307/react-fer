@@ -44,20 +44,40 @@ export default function AccCreate() {
     };
 
     return (
-        <Box component={Paper} sx={{ p: 2, maxWidth: 700, margin: "auto" }}>
+        <Box>
             <Typography variant="h4" gutterBottom>
                 Nueva Cuenta
             </Typography>
 
-            <Box component="form" onSubmit={handleSubmit} sx={{ display: "grid", gap: 2, width: "100%" }}>
-                <TextField
+            <Box component="form" onSubmit={handleSubmit} sx={{
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 3,
+    p: 2
+  }}>
+                <TextField sx={{
+      flexBasis: {
+        xs: '100%',      // móvil: ancho completo
+        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+      },
+      p: 0
+    }}
                     label="Nombre de la cuenta"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                     required
                 />
 
-                <TextField
+                <TextField sx={{
+      flexBasis: {
+        xs: '100%',      // móvil: ancho completo
+        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+      },
+      p: 0
+    }}
+       
                     label="Monto inicial"
                     value={ammount}
                     onChange={(e) => setAmmount(e.target.value === "" ? "" : Number(e.target.value))}
@@ -65,7 +85,15 @@ export default function AccCreate() {
                     inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 />
 
-                <TextField select label="Tipo de cuenta" value={atype} onChange={(e) => setAtype(e.target.value as AccountViewModel['atype'])}>
+                <TextField sx={{
+      flexBasis: {
+        xs: '100%',      // móvil: ancho completo
+        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+      },
+      p: 0
+    }}
+        select label="Tipo de cuenta" value={atype} onChange={(e) => setAtype(e.target.value as AccountViewModel['atype'])}>
                     <MenuItem value="savings">Ahorros</MenuItem>
                     <MenuItem value="investment">Inversiones</MenuItem>
                     <MenuItem value="cash">Efectivo</MenuItem>
@@ -78,7 +106,16 @@ export default function AccCreate() {
                     </Typography>
                 )}
 
-                <Box sx={{ display: "flex", gap: 2 }}>
+                <Box sx={{
+      flexBasis: {
+        xs: '100%',      // móvil: ancho completo
+        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+      },
+      p: 0,
+        display: 'flex', justifyContent: 'space-between'
+    }}
+       >
                     <Button type="submit" variant="contained">
                         Crear
                     </Button>

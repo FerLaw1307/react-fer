@@ -19,7 +19,7 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import WidgetsIcon from '@mui/icons-material/Widgets';
 
 const drawerWidth = 240;
-const appTitle = "Michi accounts";
+const appTitle = "";
 const navItems = [
   { text: "Mis cuentas", to: "/", icon: <HomeIcon /> },
   { text: "Contacto", to: "/contact", icon: <ContactMailIcon /> },
@@ -61,6 +61,8 @@ export default function Layout() {
       <AppBar
         position="fixed"
         sx={{
+          backgroundColor: "#F5E6D3",
+          color: "#3D2817",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
@@ -106,7 +108,7 @@ export default function Layout() {
         </Drawer>
       </Box>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3, display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, display: "flex", flexDirection: "column", minHeight: "100vh", backgroundColor: '#FAF5EE', color: '#3D2817' }}>
         <Toolbar /> {/* Espaciador para el AppBar fijo */}
         <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
           <Outlet />

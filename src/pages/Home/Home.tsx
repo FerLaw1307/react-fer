@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <Box>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Mis cuentas
       </Typography>
 
