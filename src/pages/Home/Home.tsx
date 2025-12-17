@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AccountCard from "../../components/account/account-card";
-import { useAccounts } from "../../hooks/useAccounts";
+import { useAccountsContext } from "../../contexts/AccountsContext";
 import { Button, Card, CardContent} from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import AddIcon from "@mui/icons-material/Add";
@@ -13,7 +13,7 @@ import { RemoveCircle } from "@mui/icons-material";
 export default function Home() {
   // const listAccount = [new AccountViewModel()];
   // const { accounts, loading, error } = {accounts: listAccount,  loading: true , error :""};
-  const { accounts, loading, error } = useAccounts();
+  const { accounts, loading, error } = useAccountsContext();
 
   const balance: number = 18500;
   const buttons = [

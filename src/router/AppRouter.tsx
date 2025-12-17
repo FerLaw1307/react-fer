@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Contact from "../pages/Contact/Contact";
 import TabsExperiment from "../pages/Experiments/Tabs";
 import AccCreate from "../pages/Account/AccCreate";
+import AccountDetail from "../pages/Account/AccountDetail";
 
 export default function AppRouter() {
   return (
@@ -13,6 +14,7 @@ export default function AppRouter() {
           <Route index element={<Home />} />
           <Route path="contact" element={<Contact />} />
           <Route path="account-create" element={<AccCreate />} />
+          <Route path="account/:id" element={<AccountDetail />} />
           <Route path="experiments">
             <Route path="tabs" element={<TabsExperiment />} />
             <Route path="tabs/:id" element={<TabsExperiment />} />

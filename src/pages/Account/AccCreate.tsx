@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Typography, Box, TextField, Button, MenuItem, Paper } from "@mui/material";
+import { Typography, Box, TextField, Button, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import type { AccountViewModel } from "../../domain/viewmodels/AccountVm";
-
-function formatAmount(amount: number) {
-    return amount.toLocaleString("en-US", { style: "currency", currency: "USD" });
-}
+import { AccountViewModel as UIAccountViewModel } from '../../components/account/accountDto';
+import type { AccountType } from '../../components/account/accountDto';
+import { useAccountsContext } from '../../contexts/AccountsContext';
 
 export default function AccCreate() {
     const [displayName, setDisplayName] = useState("");
     const [ammount, setAmmount] = useState<number | "">("");
-    const [atype, setAtype] = useState<AccountViewModel["atype"]>("savings");
+    const [atype, setAtype] = useState<AccountType>("savings");
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const accountsCtx = useAccountsContext();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -30,17 +29,17 @@ export default function AccCreate() {
         // Generar un id simple; puedes reemplazar por UUID si lo deseas
         const id = `acct-${Date.now()}`;
 
-        const account: AccountViewModel = {
+        const account = new UIAccountViewModel({
             id,
-            displayName,
-            amountFormatted: formatAmount(amt),
-            ammount: amt,
-            atype,
-        };
+            name: displayName,
+            type: atype,
+            amount: amt,
+        });
 
-        // Por ahora solo loguear y navegar a la página principal pasando el objeto en state
-        console.log("Cuenta creada:", account);
-        navigate('/', { state: { createdAccount: account } });
+        // Añadir la cuenta al contexto y navegar a la página principal
+        console.log('Cuenta creada:', account);
+        accountsCtx.addAccount(account);
+        navigate('/');
     };
 
     return (
@@ -50,19 +49,19 @@ export default function AccCreate() {
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} sx={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 3,
-    p: 2
-  }}>
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 3,
+                p: 2
+            }}>
                 <TextField sx={{
-      flexBasis: {
-        xs: '100%',      // móvil: ancho completo
-        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
-        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
-      },
-      p: 0
-    }}
+                    flexBasis: {
+                        xs: '100%',      // móvil: ancho completo
+                        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+                        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+                    },
+                    p: 0
+                }}
                     label="Nombre de la cuenta"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
@@ -70,14 +69,14 @@ export default function AccCreate() {
                 />
 
                 <TextField sx={{
-      flexBasis: {
-        xs: '100%',      // móvil: ancho completo
-        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
-        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
-      },
-      p: 0
-    }}
-       
+                    flexBasis: {
+                        xs: '100%',      // móvil: ancho completo
+                        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+                        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+                    },
+                    p: 0
+                }}
+
                     label="Monto inicial"
                     value={ammount}
                     onChange={(e) => setAmmount(e.target.value === "" ? "" : Number(e.target.value))}
@@ -86,14 +85,14 @@ export default function AccCreate() {
                 />
 
                 <TextField sx={{
-      flexBasis: {
-        xs: '100%',      // móvil: ancho completo
-        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
-        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
-      },
-      p: 0
-    }}
-        select label="Tipo de cuenta" value={atype} onChange={(e) => setAtype(e.target.value as AccountViewModel['atype'])}>
+                    flexBasis: {
+                        xs: '100%',      // móvil: ancho completo
+                        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+                        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+                    },
+                    p: 0
+                }}
+                    select label="Tipo de cuenta" value={atype} onChange={(e) => setAtype(e.target.value as AccountType)}>
                     <MenuItem value="savings">Ahorros</MenuItem>
                     <MenuItem value="investment">Inversiones</MenuItem>
                     <MenuItem value="cash">Efectivo</MenuItem>
@@ -107,15 +106,15 @@ export default function AccCreate() {
                 )}
 
                 <Box sx={{
-      flexBasis: {
-        xs: '100%',      // móvil: ancho completo
-        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
-        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
-      },
-      p: 0,
-        display: 'flex', justifyContent: 'space-between'
-    }}
-       >
+                    flexBasis: {
+                        xs: '100%',      // móvil: ancho completo
+                        sm: 'calc(50% - 8px)',  // tablet: 2 columnas
+                        md: 'calc(33.333% - 11px)', // desktop: 3 columnas
+                    },
+                    p: 0,
+                    display: 'flex', justifyContent: 'space-between'
+                }}
+                >
                     <Button type="submit" variant="contained">
                         Crear
                     </Button>

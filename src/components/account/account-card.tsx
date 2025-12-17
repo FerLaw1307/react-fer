@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { AccountViewModel } from "./accountDto";
+import { useNavigate } from "react-router-dom";
 
 type Props = { account: AccountViewModel };
 
@@ -18,13 +19,14 @@ const typeColors: Record<string, string> = {
 
 export default function AccountCard({ account }: Props) {
   const formatted = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" }).format(
-    account.amount
+    account.getBalance()
   );
   const initials = (account.name || "").split(" ").map((n) => n[0]).slice(0, 2).join("");
   const bg = typeColors[account.type] ?? typeColors.other;
+  const navigate = useNavigate();
 
   return (
-    <Card sx={{ borderRadius: 4, borderColor: bg, borderWidth: 2, borderStyle: 'solid' }}>
+    <Card sx={{ borderRadius: 4, borderColor: bg, borderWidth: 2, borderStyle: 'solid', cursor: 'pointer' }} onClick={() => navigate(`/account/${account.id}`)}>
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: bg }}>{initials}</Avatar>}
         title={account.name}
